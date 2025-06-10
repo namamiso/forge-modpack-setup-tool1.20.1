@@ -1,7 +1,8 @@
 @echo off
-title Minecraft Forge 完全自動セットアップ
+chcp 65001 >nul
+title Minecraft Forge 自動セットアップ
 
-echo 準備できたらエンター押しな
+echo 準備できたらエンター押してー
 pause >nul
 
 :: ステップ1: Java ZIP を展開
@@ -10,7 +11,7 @@ if not exist "java\zulu17" (
     powershell -Command "Expand-Archive -Force 'java\zulu17.zip' 'java\zulu17'"
 )
 
-:: ステップ2: Forge クライアントをインストール
+:: ステップ2: Forge クライアントインストール
 if not exist "%APPDATA%\.minecraft\versions\1.20.1-forge-47.4.0" (
     echo Forge をインストール中...
     "java\zulu17\zulu17\bin\java.exe" -jar forge-1.20.1-47.4.0-installer.jar --installClient
@@ -24,13 +25,13 @@ xcopy /Y /Q /I "mods\*" "%APPDATA%\.minecraft\mods\"
 echo シェーダーをコピー中...
 xcopy /Y /Q /I "shaderpacks\*" "%APPDATA%\.minecraft\shaderpacks\"
 
-echo 終わったからはよエンターおせ
+echo 終わったで、エンター押しな
 pause >nul
 
-:: 音声再生（非同期）
+:: 音声再生
 start /min "" powershell -c (New-Object Media.SoundPlayer "sound\success.wav").PlaySync()
 
-:: 画像表示（1.5秒後に自動で閉じる）
+:: 画像表示（1.5秒で自動クローズ）
 start "" /wait powershell -WindowStyle Hidden -Command ^
 "$img = 'img\success.png'; ^
  Add-Type -AssemblyName System.Windows.Forms; ^
